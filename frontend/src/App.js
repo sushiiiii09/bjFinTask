@@ -8,16 +8,21 @@ const App = () => {
 
   const handleSubmit = async () => {
     try {
+      // Parse the JSON input entered by the user
       const validJson = JSON.parse(jsonInput);
-      const res = await fetch("http://localhost:3000/bfhl", {
+
+      // Make the POST request to your deployed backend
+      const res = await fetch("https://bajaj-task-sand.vercel.app/bfhl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validJson),
       });
+
+      // Get the JSON response
       const data = await res.json();
-      setResponse(data);
+      setResponse(data); // Set response in your state to display it in the UI
     } catch (err) {
-      setError("Invalid JSON input");
+      setError("Invalid JSON input"); // Handle any errors (invalid JSON, network issues)
     }
   };
 
